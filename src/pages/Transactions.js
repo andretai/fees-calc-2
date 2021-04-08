@@ -2,6 +2,7 @@ import React from 'react';
 import Summary from '../components/transactions/Summary';
 import Guide from '../components/transactions/Guide';
 import Records from '../components/transactions/Records';
+import { Button } from '@material-ui/core';
 
 const Transactions = () => {
   const [summary, setSummary] = React.useState(false);
@@ -11,8 +12,8 @@ const Transactions = () => {
   return (
     <div>
       <div id="buttons">
-        <button>new transaction</button>
-        <button onClick={() => toggleSummary()}>calculate profit/loss</button>
+        <Button color="primary" variant="contained">new transaction</Button>
+        <Button color="secondary" onClick={() => toggleSummary()}>calculate profit/loss</Button>
       </div>
       <div id="summaryOrGuide">
         { summary === true ? <Summary/> : <Guide/> }
