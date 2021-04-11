@@ -14,7 +14,7 @@ let constants = {
   tax: {
     rate: 0.06
   },
-  calculation: function(price, quantity) {
+  calculate_cost: function(price, quantity) {
     // Gross Value of Purchase/Sale
     var gross = price * quantity;
     // 0.42 % of Transaction Value or a Minimum of RM 12
@@ -30,6 +30,34 @@ let constants = {
     var tax = constants.tax.rate * brokerfee;
     // Total Transaction Cost
     return (brokerfee + clearfee + stampfee + tax).toFixed(2);
+  },
+  calculate_pl: function(records) {
+    var paid = 0;
+    var earned = 0;
+    records.forEach(record => {
+      let price = parseFloat(record.price);
+      let quantity = parseFloat(record.quantity);
+      let cost = parseFloat(record.cost);
+      console.log(record);
+      if (record.type === 'buy') {
+        paid += ((price * quantity) + cost);
+      } else {
+        paid += cost;
+        earned += (price * quantity);
+      }
+    });
+    console.log('paid', paid, 'earned', earned)
+    var pct;
+    if (earned > paid) {
+      console.log('earned > paid')
+      pct = (earned / paid - 1) * 100;
+    } else if (earned < paid) {
+      console.log('paid > earned')
+      pct = -(1 - earned / paid) * 100;
+    } else {
+      pct = 0;
+    }
+    return pct.toFixed(2);
   }
 }
 

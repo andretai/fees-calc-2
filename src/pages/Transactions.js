@@ -10,14 +10,14 @@ import { Button, Modal, Typography } from '@material-ui/core';
 const Transactions = () => {
 
   // States
-  const [summary, toggleSummary] = React.useState(false);
   const [records, setRecords] = React.useState([]);
-  const [addRecordModal, toggleAddRecordModal] = React.useState(true);
+  const [addRecordModal, toggleAddRecordModal] = React.useState(false);
+  const [summaryModal, toggleSummaryModal] = React.useState(true);
 
   // Functions
   const addRecord = record => {
     record.id = records.length + 1;
-    record.cost = constants.calculation(record.price, record.quantity);
+    record.cost = constants.calculate_cost(record.price, record.quantity);
     setRecords([...records, record]);
   };
 
@@ -27,15 +27,18 @@ const Transactions = () => {
         <Button color="primary" variant="contained">
           <Typography variant="button" onClick={() => toggleAddRecordModal(true)}>new transaction</Typography>
         </Button>
-        <Button color="secondary" variant="contained" onClick={() => toggleSummary()}>
+        <Button color="secondary" variant="contained" onClick={() => toggleSummaryModal(true)}>
           <Typography variant="button">calculate profit/loss</Typography>
         </Button>
       </div>
       <Modal open={addRecordModal} onClose={() => toggleAddRecordModal(false)}>
         <AddRecord addRecord={addRecord} toggleAddRecordModal={toggleAddRecordModal}/>
       </Modal>
-      <div id="summaryOrGuide">
-        { summary === true ? <Summary/> : <Guide/> }
+      <Modal open={summaryModal} onClose={() => toggleSummaryModal(false)}>
+        <Summary records={records} calculate_pl={constants.calculate_pl} toggleSummaryModal={toggleSummaryModal}/>
+      </Modal>
+      <div id="guide">
+        <Guide/>
       </div>
       <div id="records">
         <Records records={records}/>
