@@ -46,7 +46,6 @@ let constants = {
         earned += (price * quantity);
       }
     });
-    console.log('paid', paid, 'earned', earned)
     var pct;
     if (earned > paid) {
       console.log('earned > paid')
@@ -58,6 +57,26 @@ let constants = {
       pct = 0;
     }
     return pct.toFixed(2);
+  },
+  calculate_value: function(type, records) {
+    var val = 0;
+    records.forEach(record => {
+      if (type === 'buy') {
+        if (record.type === 'buy') {
+          val += (record.quantity * record.price);
+        }
+      } else {
+        if (record.type === 'sell') {
+          val += (record.quantity * record.price);
+        }
+      }
+    })
+    return val;
+  },
+  calculate_allcosts: function(records) {
+    let costs = records.map(record => parseFloat(record.cost));
+    console.log(costs)
+    return costs.reduce((acc, cost) => acc + cost);
   }
 }
 
