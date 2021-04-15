@@ -42,6 +42,14 @@ const Transactions = () => {
     setRecords([...records, record]);
   };
 
+  const removeRecord = removedRecord => {
+    console.log('Removing.. ', removedRecord);
+    let updatedRecords = records.filter(record => {
+      return record.id !== removedRecord.id;
+    });
+    setRecords([...updatedRecords]);
+  }
+
   return (
     <div className={classes.page}>
       <Grid container spacing={1} className={classes.section}>
@@ -66,9 +74,8 @@ const Transactions = () => {
         <Guide/>
       </div>
       <div id="records">
-        <Records records={records}/>
+        <Records records={records} removeRecord={removeRecord}/>
       </div>
-      {/* <button onClick={() => console.log(records)}>console.log</button> */}
     </div>
   )
 }
