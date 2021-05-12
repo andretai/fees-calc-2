@@ -36,6 +36,8 @@ const AddRecord = React.forwardRef((props, ref) => {
   const classes = useStyles();
   const addRecord = props.addRecord;
   const toggleAddRecordModal = props.toggleAddRecordModal;
+  const toggleSnackBar = props.toggleSnackBar;
+  const setSbMsg = props.setSbMsg;
   const handleChange = e => {
     record[e.target.name] = e.target.value;
   }

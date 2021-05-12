@@ -76,7 +76,7 @@ const Summary = React.forwardRef((props, ref) => {
         <Typography variant="button" style={{ fontWeight: 900 }}>{calculate_pl(records)}%</Typography>
       </div>
       <div className={classes.button_div}>
-        <Button variant="contained" color="secondary" className={classes.button} style={{marginRight: '4px'}} onClick={() => toggleSummaryModal(false)}><Typography>SAVE</Typography></Button>
+        <Button disabled variant="contained" color="secondary" className={classes.button} style={{marginRight: '4px'}} onClick={() => toggleSummaryModal(false)}><Typography>SAVE</Typography></Button>
         <Button variant="contained" color="primary" className={classes.button} style={{marginLeft: '4px'}} onClick={() => toggleSummaryModal(false)}><Typography>DONE</Typography></Button>
       </div>
       {/* <button onClick={() => console.log(constants.calculate_value('buy', records))}>calc buy val</button>
